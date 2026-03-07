@@ -1,0 +1,65 @@
+/* LoginPage.css */
+.login-page { display: flex; height: 100vh; overflow: hidden; }
+
+.login-page__left {
+  flex: 1;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+  padding: 48px 40px; display: flex; flex-direction: column;
+  justify-content: center; gap: 40px; color: white;
+}
+.login-page__brand-icon { font-size: 56px; margin-bottom: 12px; }
+.login-page__brand-name { font-size: 32px; font-weight: 700; }
+.login-page__brand-sub  { font-size: 14px; opacity: 0.6; margin-top: 6px; }
+
+.login-page__features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.login-page__features li { font-size: 14px; opacity: 0.85; }
+
+.login-page__right {
+  width: 420px; flex-shrink: 0; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px; overflow-y: auto;
+}
+.login-card { width: 100%; }
+
+.login-card__tabs { display: flex; border-bottom: 2px solid #e2e8f0; margin-bottom: 28px; }
+.login-card__tab {
+  flex: 1; padding: 10px; background: none;
+  border: none; border-bottom: 2px solid transparent; margin-bottom: -2px;
+  font-size: 14px; font-weight: 600; color: #94a3b8; cursor: pointer; transition: all 0.15s;
+}
+.login-card__tab--active { color: #2563eb; border-bottom-color: #2563eb; }
+
+.login-card__form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: flex; gap: 12px; }
+.form-row .form-field { flex: 1; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 13px; font-weight: 600; color: #374151; }
+.form-input {
+  padding: 10px 12px; border: 1.5px solid #e2e8f0;
+  border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.15s;
+}
+.form-input:focus { border-color: #2563eb; }
+
+.login-card__error {
+  background: #fef2f2; border: 1px solid #fca5a5;
+  border-radius: 8px; padding: 10px 14px; color: #dc2626; font-size: 13px;
+}
+.login-card__success {
+  background: #f0fdf4; border: 1px solid #86efac;
+  border-radius: 8px; padding: 10px 14px; color: #16a34a; font-size: 13px;
+}
+
+.login-card__submit {
+  padding: 12px; background: #2563eb; color: white; border: none;
+  border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; margin-top: 4px; transition: background 0.15s;
+}
+.login-card__submit:hover:not(:disabled) { background: #1d4ed8; }
+.login-card__submit:disabled { opacity: 0.7; cursor: not-allowed; }
+.btn-spinner {
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff; border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}

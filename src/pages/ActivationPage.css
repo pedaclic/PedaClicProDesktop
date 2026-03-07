@@ -1,0 +1,163 @@
+/* PedaClic Pro Desktop — ActivationPage.css */
+
+.activation-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Panneau gauche ── */
+.activation-left {
+  width: 380px;
+  flex-shrink: 0;
+  background: linear-gradient(160deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 40px;
+}
+
+.activation-left__logo    { font-size: 52px; margin-bottom: 12px; }
+.activation-left__title   { font-size: 28px; font-weight: 800; margin: 0; }
+.activation-left__subtitle {
+  font-size: 14px; opacity: 0.8; margin: 6px 0 40px;
+}
+
+.activation-left__features {
+  display: flex; flex-direction: column; gap: 14px; flex: 1;
+}
+.feature-item {
+  font-size: 14px; opacity: 0.9;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.activation-left__footer {
+  font-size: 13px; opacity: 0.75; margin-top: 32px;
+}
+.activation-left__footer a {
+  color: #fff; font-weight: 600; text-decoration: underline;
+}
+
+/* ── Panneau droit ── */
+.activation-right {
+  flex: 1;
+  background: #f0f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.activation-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.activation-card__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.activation-card__icon { font-size: 40px; margin-bottom: 12px; }
+.activation-card__header h2 {
+  font-size: 20px; font-weight: 700;
+  color: #1e293b; margin: 0 0 8px;
+}
+.activation-card__header p {
+  font-size: 13px; color: #64748b; margin: 0;
+}
+
+/* ── Formulaire ── */
+.activation-form {
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.activation-key-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+  color: #1d4ed8;
+  box-sizing: border-box;
+}
+.activation-key-input:focus { border-color: #2563eb; }
+.activation-key-input--error { border-color: #ef4444; }
+
+.activation-error {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.activation-btn {
+  padding: 14px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.activation-btn:hover:not(:disabled) { background: #1d4ed8; }
+.activation-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.activation-note {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Succès ── */
+.activation-success {
+  text-align: center;
+  padding: 20px 0;
+}
+.activation-success__icon { font-size: 48px; margin-bottom: 12px; }
+.activation-success h3 {
+  font-size: 18px; font-weight: 700;
+  color: #16a34a; margin: 0 0 8px;
+}
+.activation-success p { color: #64748b; }
+
+/* ── Support ── */
+.activation-card__support {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+.activation-card__support a { color: #2563eb; }

@@ -1,0 +1,183 @@
+/* ============================================================
+ * PedaClic Pro Desktop — ClassesPage.css
+ * ============================================================ */
+
+/* ── Page container ── */
+.classes-page { max-width: 1100px; }
+
+/* ── En-tête page ── */
+.page-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px;
+  margin-bottom: 28px; flex-wrap: wrap;
+}
+.page-header__right { display: flex; align-items: center; gap: 12px; }
+.page-title    { font-size: 22px; font-weight: 700; color: var(--color-text); }
+.page-subtitle { font-size: 13px; color: var(--color-text-soft); margin-top: 4px; }
+
+/* ── Sélecteur d'année ── */
+.select-annee {
+  padding: 8px 12px; border: 1.5px solid var(--color-border);
+  border-radius: var(--radius); font-size: 14px;
+  background: #fff; color: var(--color-text); cursor: pointer;
+  outline: none;
+}
+.select-annee:focus { border-color: var(--color-primary); }
+
+/* ── Boutons globaux (réutilisables) ── */
+.btn-primary {
+  padding: 9px 18px; background: var(--color-primary); color: #fff;
+  border: none; border-radius: var(--radius); font-size: 14px;
+  font-weight: 600; cursor: pointer; transition: background 0.15s;
+  white-space: nowrap;
+}
+.btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary {
+  padding: 9px 18px; background: #fff; color: var(--color-text);
+  border: 1.5px solid var(--color-border); border-radius: var(--radius);
+  font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+}
+.btn-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+.btn-danger {
+  padding: 9px 18px; background: var(--color-error); color: #fff;
+  border: none; border-radius: var(--radius); font-size: 14px;
+  font-weight: 600; cursor: pointer; transition: background 0.15s;
+}
+.btn-danger:hover { background: #b91c1c; }
+
+.btn-icon {
+  width: 32px; height: 32px; border: none; border-radius: var(--radius-sm);
+  cursor: pointer; font-size: 14px; display: flex;
+  align-items: center; justify-content: center; transition: background 0.15s;
+}
+.btn-icon--edit   { background: #eff6ff; }
+.btn-icon--edit:hover   { background: #dbeafe; }
+.btn-icon--delete { background: #fef2f2; }
+.btn-icon--delete:hover { background: #fee2e2; }
+
+/* ── Loading ── */
+.page-loading {
+  display: flex; align-items: center; justify-content: center;
+  height: 200px;
+}
+
+/* ── État vide ── */
+.empty-state {
+  text-align: center; padding: 64px 32px;
+  background: #fff; border-radius: var(--radius-lg);
+  border: 2px dashed var(--color-border);
+}
+.empty-state__icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.empty-state p  { color: var(--color-text-soft); margin-bottom: 24px; }
+
+/* ── Grille de classes ── */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ── Carte classe ── */
+.classe-card {
+  background: #fff; border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  overflow: hidden; transition: box-shadow 0.15s, border-color 0.15s;
+  display: flex; flex-direction: column;
+}
+.classe-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary-light);
+}
+
+.classe-card__banner { height: 5px; }
+
+.classe-card__body { padding: 16px; flex: 1; }
+.classe-card__niveau {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+}
+.classe-card__nom {
+  font-size: 18px; font-weight: 700;
+  color: var(--color-text); margin-bottom: 12px;
+}
+.classe-card__stats { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.stat-badge {
+  font-size: 12px; color: var(--color-text-soft);
+  background: var(--color-bg); padding: 3px 8px;
+  border-radius: 20px; border: 1px solid var(--color-border);
+}
+
+.classe-card__actions {
+  display: flex; gap: 8px; padding: 10px 16px;
+  border-top: 1px solid var(--color-border);
+  background: #fafafa; justify-content: flex-end;
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000; padding: 16px;
+}
+.modal {
+  background: #fff; border-radius: var(--radius-xl);
+  width: 100%; max-width: 480px;
+  box-shadow: var(--shadow-lg); overflow: hidden;
+}
+.modal--small { max-width: 380px; }
+
+.modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; border-bottom: 1px solid var(--color-border);
+}
+.modal__header h2 { font-size: 16px; font-weight: 700; }
+.modal__close {
+  background: none; border: none; font-size: 16px;
+  cursor: pointer; color: var(--color-text-muted);
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal__close:hover { background: var(--color-bg); }
+
+.modal__form { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.modal__body { padding: 24px; }
+.modal__footer {
+  display: flex; gap: 12px; justify-content: flex-end;
+  padding: 16px 24px; border-top: 1px solid var(--color-border);
+  background: #fafafa;
+}
+
+/* ── Champs formulaire ── */
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-label  { font-size: 13px; font-weight: 600; color: #374151; }
+.form-input  {
+  padding: 10px 12px; border: 1.5px solid var(--color-border);
+  border-radius: var(--radius); font-size: 14px; outline: none;
+  transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--color-primary); }
+.form-error {
+  background: #fef2f2; border: 1px solid #fca5a5;
+  border-radius: var(--radius); padding: 10px 14px;
+  color: var(--color-error); font-size: 13px;
+}
+.text-warning { color: var(--color-warning); font-size: 13px; margin-top: 8px; }
+
+/* ── Grille de niveaux ── */
+.niveau-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+}
+.niveau-btn {
+  padding: 8px 4px; border: 1.5px solid var(--color-border);
+  border-radius: var(--radius); font-size: 12px; font-weight: 600;
+  cursor: pointer; background: #fff; color: var(--color-text);
+  transition: all 0.15s; text-align: center;
+}
+.niveau-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.niveau-btn--active { color: #fff !important; }

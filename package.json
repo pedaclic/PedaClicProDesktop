@@ -1,0 +1,97 @@
+{
+  "name": "pedaclic-pro-desktop",
+  "version": "1.0.0",
+  "description": "PedaClic Pro Desktop — Application enseignant hors-ligne (Sénégal)",
+  "main": "dist-electron/main.js",
+  "author": {
+    "name": "PedaClic",
+    "email": "contact@pedaclic.sn"
+  },
+  "private": true,
+  "scripts": {
+    "dev:renderer": "vite",
+    "dev:electron": "tsc -p tsconfig.electron.json && electron . 2>&1",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "build": "npm run build:renderer && npm run build:electron",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "prepare:icons": "node scripts/generate-icons.js",
+    "dist:win": "npm run prepare:icons && npm run build && electron-builder --win",
+    "dist:mac": "npm run prepare:icons && npm run build && electron-builder --mac",
+    "postinstall": "electron-builder install-app-deps && electron-rebuild -f -w better-sqlite3",
+    "rebuild": "electron-rebuild -f -w better-sqlite3"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^4.3.2",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^9.6.0",
+    "electron-updater": "^6.1.8",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.8",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^29.0.1",
+    "electron-builder": "^24.9.1",
+    "electron-rebuild": "^3.2.9",
+    "jimp": "^0.22.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "sn.pedaclic.pro",
+    "productName": "PedaClic Pro",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build-resources/icon.png"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "build-resources/icon.png",
+      "category": "public.app-category.education"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "PedaClic Pro"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "pedaclic",
+      "repo": "pedaclic-pro-releases"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+/* PedaClic Pro Desktop — Variables CSS globales
+   Palette cohérente avec PedaClic Web (bleu #2563eb) */
+
+:root {
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-primary-light: #3b82f6;
+  --color-primary-pale:  #eff6ff;
+  --color-white:         #ffffff;
+  --color-bg:            #f0f4ff;
+  --color-surface:       #ffffff;
+  --color-border:        #e2e8f0;
+  --color-text:          #1e293b;
+  --color-text-soft:     #64748b;
+  --color-text-muted:    #94a3b8;
+  --color-success:       #16a34a;
+  --color-warning:       #ca8a04;
+  --color-error:         #dc2626;
+
+  --sidebar-width:       240px;
+  --sidebar-bg:          #1e3a5f;
+  --sidebar-text:        #cbd5e1;
+  --sidebar-active-bg:   #2563eb;
+  --sidebar-hover-bg:    rgba(255,255,255,0.08);
+  --header-height:       60px;
+  --header-bg:           #2563eb;
+
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px; --space-5: 20px;  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 4px; --radius: 8px; --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+  --shadow:    0 2px 8px rgba(0,0,0,.10);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.12);
+
+  --font-family:    'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-size-xs:   11px; --font-size-sm: 13px;
+  --font-size-base: 14px; --font-size-md: 15px;
+  --font-size-lg:   18px; --font-size-xl: 22px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+#root { height: 100%; display: flex; flex-direction: column; }
+
+/* Loading global */
+.app-loading {
+  display: flex; align-items: center; justify-content: center; height: 100vh;
+}
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+/* Grille tableau de bord — cartes harmonieusement réparties (2×3 ou 3×2) */
+.dashboard-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 640px) {
+  .dashboard-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
