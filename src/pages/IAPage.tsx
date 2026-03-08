@@ -155,6 +155,9 @@ Génère un SUJET DE DEVOIR/COMPOSITION avec :
 3. ❓ Questions numérotées avec points attribués
 4. 📊 Barème détaillé (total : 20 points)
 5. ✅ Éléments de correction attendus`;
+
+      default:
+        return base;
     }
   };
 
@@ -173,40 +176,29 @@ Génère un SUJET DE DEVOIR/COMPOSITION avec :
         throw new Error('Générateur IA non disponible');
       }
 
-      // Mapper les types desktop → types serveur
+      // Type stable : cours_complet accepté par l'API ; le prompt détaillé (construirePrompt) fait le travail
       const typeMapping: Record<TypeContenu, string> = {
         fiche_cours: 'cours_complet',
-        exercices:   'exercices_corriges',
-        quiz_avance: 'quiz_avance',
-        sequence:    'evaluation_adaptee',
-        devoir:      'sujet_examen',
+        exercices:   'cours_complet',
+        quiz_avance: 'cours_complet',
+        sequence:    'cours_complet',
+        devoir:      'cours_complet',
       };
-
-      // Construire les précisions selon le type
-      let chapitreComplet = form.sujet;
-      if (form.details) chapitreComplet += `\n\nPrécisions : ${form.details}`;
-      if (form.type === 'exercices')
-        chapitreComplet += `\n\nNombre d'exercices souhaités : ${form.nbExercices}`;
-      if (form.type === 'sequence')
-        chapitreComplet += `\n\nNombre de séances : ${form.nbSeances}`;
-      if (form.type === 'quiz_avance')
-        chapitreComplet += `\n\nNombre de questions : ${form.nbExercices}`;
-      if (form.type === 'fiche_cours')
-        chapitreComplet += `\n\nDurée de la séance : ${form.duree}`;
 
       const payload = {
         type:       typeMapping[form.type],
         discipline: form.matiere || 'Général',
         classe:     form.niveau  || 'Collège',
-        chapitre:   chapitreComplet,
+        chapitre:   construirePrompt(),
       };
 
       const result = await window.electronAPI.aiGenerate(payload) as {
-        success?: boolean; content?: string; error?: string; message?: string;
+        success?: boolean; content?: string; error?: string; message?: string; _statusCode?: number;
       };
 
       const content = result.content;
       const errMsg = result.error ?? result.message;
+      const status = result._statusCode;
 
       if (content && content.trim().length > 0) {
         setContenuGenere(content);
@@ -214,7 +206,17 @@ Génère un SUJET DE DEVOIR/COMPOSITION avec :
           `${TYPES_CONTENU.find(t => t.id === form.type)?.label} — ${form.sujet}`
         );
       } else {
-        setError(errMsg && errMsg.trim() ? errMsg : 'Erreur lors de la génération');
+        let msg = errMsg && errMsg.trim();
+        if (!msg) {
+          msg = status === 401 || status === 403
+            ? 'Licence invalide ou expirée. Vérifiez votre activation.'
+            : status && status >= 500
+            ? 'Serveur temporairement indisponible. Réessayez plus tard.'
+            : !status
+            ? 'Connexion impossible. Vérifiez votre connexion internet et que api.pedaclic.sn est accessible.'
+            : 'Erreur lors de la génération. Réessayez ou contactez contact@pedaclic.sn.';
+        }
+        setError(msg);
       }
     } catch (err) {
       setError((err as Error).message);
